@@ -116,6 +116,6 @@ variable "lookup_security_group" {
 }
 
 
-variable "security_group_name" {
+variable "container_security_group_id" {
   default = "Unknown"
 }
