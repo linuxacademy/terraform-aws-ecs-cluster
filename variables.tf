@@ -111,8 +111,8 @@ variable "subnet_ids" {
   type = list(string)
 }
 
-variable "lookup_security_group" {
-  default = false
+variable "create_security_group" {
+  default = true
 }
 
 

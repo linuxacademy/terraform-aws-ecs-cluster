@@ -70,7 +70,7 @@ resource "aws_iam_role_policy_attachment" "ecs_service_role" {
 # Security group resources
 #
 resource "aws_security_group" "container_instance" {
-  count  = var.deploy_autoscaling_group ? 1 : 0
+  count  = var.deploy_autoscaling_group && var.create_security_group ? 1 : 0
   vpc_id = var.vpc_id
 
   tags = {
