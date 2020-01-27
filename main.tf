@@ -80,6 +80,11 @@ resource "aws_security_group" "container_instance" {
   }
 }
 
+data "aws_security_group" "container_instance" {
+  count = var.deploy_autoscaling_group && ! var.create_security_group ? 1 : 0
+  id    = var.container_security_group_id
+}
+
 #
 # AutoScaling resources
 #
@@ -171,7 +176,7 @@ resource "aws_launch_template" "container_instance" {
   instance_initiated_shutdown_behavior = "terminate"
   instance_type                        = var.instance_type
   key_name                             = var.key_name
-  vpc_security_group_ids               = aws_security_group.container_instance[*].id
+  vpc_security_group_ids               = var.lookup_security_group ? [data.aws_security_group.container_instance.id] : aws_security_group.container_instance[*].id
   user_data = base64encode(
     data.template_cloudinit_config.container_instance_cloud_config.rendered,
   )

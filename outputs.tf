@@ -7,7 +7,7 @@ output "name" {
 }
 
 output "container_instance_security_group_ids" {
-  value = aws_security_group.container_instance[*].id
+  value = aws_security_group.container_instance ? aws_security_group.container_instance[*].id : data.aws_security_group.container_instance[*].id
 }
 
 output "container_instance_ecs_for_ec2_service_role" {

@@ -111,3 +111,11 @@ variable "subnet_ids" {
   type = list(string)
 }
 
+variable "lookup_security_group" {
+  default = false
+}
+
+
+variable "security_group_name" {
+  default = "Unknown"
+}
